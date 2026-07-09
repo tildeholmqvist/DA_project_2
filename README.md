@@ -1,75 +1,181 @@
-# ![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
+# Car Price Analysis — Capstone Unit 2
 
-## Template Instructions
+## Project Overview
 
-Welcome,
+This project analyses a car price dataset from the US automobile market 
+to identify key pricing factors and build a machine learning model to 
+predict car prices.
 
-This is the Code Institute student template for the three Data Analytics capstone projects. We have preinstalled all of the tools you need to get started. It's perfectly okay to use this template as the basis for your project submissions. Click the `Use this template` button above to get started.
+The project follows the CRISP-DM methodology and includes:
+* ETL pipeline for data cleaning and feature engineering
+* Exploratory data analysis with hypothesis testing
+* Machine learning model (ExtraTreesRegressor, R²=0.911)
+* Interactive Tableau dashboard for data storytelling
+* Streamlit app for interactive price predictions
 
-You can safely delete the Template Instructions section of this README.md file and modify the remaining paragraphs for your own project. Please do read the Template Instructions at least once, though! It contains some important information about the IDE and the extensions we use.
+**Live App:** [Streamlit App](XXXXXXXX)
+**Tableau Dashboard:** [Car Price Analysis](https://public.tableau.com/shared/N6ZSWTY39?:display_count=n&:origin=viz_share_link)
 
-If you are working on the first capstone project, you can also delete `.python-version`, `.slugignore`, `Procfile` and `setup.sh` as they are only required for later dashboard projects. 
+---
 
-## How to use this repo
+## Table of Contents
+1. [Project Overview](#project-overview)
+2. [Dataset](#dataset)
+3. [Business Hypotheses](#business-hypotheses)
+4. [ETL Pipeline](#etl-pipeline)
+5. [EDA & Hypothesis Testing](#eda--hypothesis-testing)
+6. [Machine Learning](#machine-learning)
+7. [Dashboard & Visualisation](#dashboard--visualisation)
+8. [Streamlit App](#streamlit-app)
+9. [Project Management](#project-management)
+10. [Technologies Used](#technologies-used)
+11. [How to Run](#how-to-run)
+12. [Credits](#credits)
 
-1. Use this template to create your GitHub project repo. Click the **Use this template** button, then click **Create a new repository**.
+---
 
-1. Copy the URL of your repository to your clipboard.
+## Dataset
 
-1. In VS Code, select **File** -> **Open Folder**.
+* **Source:** [Kaggle — Car Price Prediction](https://www.kaggle.com/datasets/hellbuoy/car-price-prediction)
+* **Size:** 205 rows, 26 columns
+* **Target variable:** Price (USD)
+* **Features:** Engine size, horsepower, curb weight, body style, car brand and more
 
-1. Select your `vscode-projects` folder, then click the **Select Folder** button on Windows, or the **Open** button on Mac.
+### Data Dictionary
+| Column | Description |
+|---|---|
+| CarName | Car brand and model name |
+| fueltype | Fuel type (gas/diesel) |
+| carbody | Body style (sedan, hatchback, etc.) |
+| enginesize | Engine displacement |
+| horsepower | Engine power output |
+| curbweight | Weight of the car |
+| price | Car price in USD (target variable) |
 
-1. From the top menu in VS Code, select **Terminal** > **New Terminal** to open a new terminal.
+---
 
-1. In the terminal, type `git clone` followed by the URL of your GitHub repository. Then hit **Enter**. This command will download all the files in your GitHub repository into your vscode-projects folder.
+## Business Hypotheses
 
-1. In VS Code, select **File** > **Open Folder** again.
+| Hypothesis | Result | p-value |
+|---|---|---|
+| H1: Engine size and horsepower are the strongest predictors of price | ✅ Partially confirmed | Correlation: 0.87 |
+| H2: Luxury brands have significantly higher prices than economy brands | ✅ Confirmed | 0.0000 |
+| H3: Diesel cars have higher prices than petrol cars | ❌ Rejected | 0.8659 |
+| H4: Car body style significantly influences price | ✅ Confirmed | 0.0000 |
 
-1. This time, navigate to and select the folder for the project you just downloaded. Then, click **Select Folder**.
+### Key Finding
+Engine size (correlation: 0.87) is the strongest predictor of car price, 
+followed by curbweight (0.84) and horsepower (0.81).
 
-1. A virtual environment is necessary when working with Python projects to ensure each project's dependencies are kept separate. You need to create your virtual environment, also called a venv, and then activate it whenever you return to your workspace.
-Click the gear icon in the lower left-hand corner of the screen to open the Manage menu and select **Command Palette** to open the VS Code command palette.
+----
 
-1. In the command palette, type: *create environment* and select **Python: Create Environment…**
+## ETL Pipeline
 
-1. Choose **Venv** from the dropdown list.
+### Extract
+* Raw dataset loaded from Kaggle (205 rows, 26 columns)
+* No missing values found
 
-1. Choose the Python version you installed earlier. Currently, we recommend Python 3.12.8
+### Transform
+* Ordinal encoding of cylindernumber and doornumber (text→integers)
+* Price distribution analysed (mean $13,276, median $10,295, std $7,988)
+* 15 price outliers identified using IQR method — retained as legitimate luxury vehicles
 
-1. **DO NOT** click the box next to `requirements.txt`; you need to complete additional steps before installing your dependencies. Click **OK**.
+### Feature Engineering
+* **price_per_horsepower** — cost efficiency relative to performance
+* **price_per_enginesize** — cost relative to engine displacement
+* Note: Both features excluded from ML to avoid data leakage
 
-1. You will see a `.venv` folder appear in the file explorer pane, indicating that the virtual environment has been created.
+### Load
+* Cleaned dataset saved to `outputs/datasets/cleaned/car_prices_cleaned.csv`
 
-1. **Important**: Note that the `.venv` folder is in the `.gitignore` file so that Git won't track it.
+### Note
+* CarBrand extraction and typo corrections are handled in the ML pipeline (03_ML.ipynb) 
+  to ensure consistent transformations during model training and prediction
 
-1. Return to the terminal by clicking on the TERMINAL tab, or click on the **Terminal** menu and choose **New Terminal** if no terminal is currently open.
+---
 
-1. In the terminal, use the command below to install your dependencies. This may take several minutes.
+## EDA & Hypothesis Testing
 
- ```console
- pip3 install -r requirements.txt
- ```
+### Statistical Methods Used
+* Pearson correlation — to measure relationships between numerical variables
+* Independent samples t-test (parametric) — to compare two groups
+* One-way ANOVA (parametric) — to compare more than two groups
 
-1. Open the `jupyter_notebooks` directory, and click on the notebook you want to open.
+### Hypothesis Results
 
-1. Click the **Kernel** button, then choose **Python Environments**.
+**H1 — Engine size and horsepower are the strongest predictors of price**
+* Engine size correlation with price: 0.87
+* Horsepower correlation with price: 0.81
+* Unexpectedly, curbweight (0.84) outperformed horsepower
+* Result: Partially confirmed ✅
 
-Note that the kernel says `Python 3.12.8` as it inherits from the venv, so it will be Python-3.12.8 if that is what is installed on your PC. To confirm this, you can use the command below in a notebook code cell.
+**H2 — Luxury brands have significantly higher prices than economy brands**
+* Brands above $20,000 average classified as luxury (Jaguar, Porsche, BMW, Buick)
+* T-test p-value: 0.0000
+* Result: Confirmed ✅
 
-```console
-! python --version
-```
+**H3 — Diesel cars have higher prices than petrol cars**
+* Dataset imbalance: 185 gas vs 20 diesel cars
+* Balanced sampling used (20 vs 20) for fair comparison
+* T-test p-value: 0.8659
+* Result: Rejected ❌
 
-## Deployment Reminders
+**H4 — Car body style significantly influences price**
+* Convertibles have highest median price
+* ANOVA p-value: 0.0000
+* Result: Confirmed ✅
 
-* The `.python-version`, `.slugignore`, `Procfile` and `setup.sh` files are necessary only if you are deploying a Streamlit app to Heroku as part of your submission for units 2 and 3. 
-* Set the `.python-version` Python version to a [Heroku-22](https://devcenter.heroku.com/articles/python-support#supported-runtimes) stack, currently supported version that most closely matches what you used in this project.
-* The project can be deployed to Heroku using the following steps.
+----
+## Machine Learning
 
-1. Log in to Heroku and create an App
-2. At the **Deploy** tab, select **GitHub** as the deployment method.
-3. Select your repository name and click **Search**. Once it is found, click **Connect**.
-4. Select the branch you want to deploy, then click **Deploy Branch**.
-5. The deployment process should happen smoothly if all deployment files are fully functional. Click the button **Open App** at the top of the page to access your App.
-6. If the slug size is too large, then add large files not required for the app to the `.slugignore` file.
+### Pipeline
+* OrdinalEncoder — categorical variable encoding
+* SimpleImputer — handles missing values
+* StandardScaler — feature scaling
+* SelectFromModel — automatic feature selection
+
+### Algorithm Selection
+Five regression algorithms were tested using a two-step search strategy:
+1. Quick search with default hyperparameters
+2. Extensive hyperparameter optimisation with GridSearchCV
+
+### Best Model: ExtraTreesRegressor
+* **Hyperparameters:** max_depth=10, min_samples_leaf=1, n_estimators=100
+* **Train R²:** 0.998
+* **Test R²:** 0.911
+* **Test RMSE:** $2,619
+* **Test MAE:** $1,572
+
+### Feature Importance
+| Feature | Importance |
+|---|---|
+| enginesize | 0.20 |
+| curbweight | 0.18 |
+| cylindernumber | 0.15 |
+| carwidth | 0.12 |
+| horsepower | 0.11 |
+| citympg | 0.09 |
+| drivewheel | 0.08 |
+| highwaympg | 0.07 |
+
+### Note on Overfitting
+The gap between train R² (0.998) and test R² (0.911) indicates mild overfitting, 
+partly expected given the small dataset size (205 rows).
+
+### Target Variable Transformation
+To address mild overfitting and right-skewed price distribution (skewness=1.78), 
+four transformers were tested:
+
+| Transformer | Mean R² (CV) |
+|---|---|
+| No transform | **0.9129** |
+| PowerTransformer | 0.9125 |
+| LogTransformer | 0.8971 |
+| YeoJohnsonTransformer | 0.8918 |
+| BoxCoxTransformer | 0.8914 |
+
+No transformation improved model performance — tree-based models are inherently 
+robust to skewness in the target variable.
+
+---
+
