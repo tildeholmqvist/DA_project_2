@@ -21,16 +21,23 @@ The project follows the CRISP-DM methodology and includes:
 ## Table of Contents
 1. [Project Overview](#project-overview)
 2. [Dataset](#dataset)
-3. [Business Hypotheses](#business-hypotheses)
-4. [ETL Pipeline](#etl-pipeline)
-5. [EDA & Hypothesis Testing](#eda--hypothesis-testing)
-6. [Machine Learning](#machine-learning)
-7. [Dashboard & Visualisation](#dashboard--visualisation)
-8. [Streamlit App](#streamlit-app)
-9. [Project Management](#project-management)
-10. [Technologies Used](#technologies-used)
-11. [How to Run](#how-to-run)
-12. [Credits](#credits)
+3. [Business Requirements](#business-requirements)
+4. [Business Hypotheses](#business-hypotheses)
+5. [ML Business Case](#ml-business-case)
+6. [ETL Pipeline](#etl-pipeline)
+7. [EDA & Hypothesis Testing](#eda--hypothesis-testing)
+8. [Machine Learning](#machine-learning)
+9. [Dashboard & Visualisation](#dashboard--visualisation)
+10. [Streamlit App](#streamlit-app)
+11. [Dashboard Design (Wireframes)](#dashboard-design-wireframes)
+12. [Testing & Validation](#testing--validation)
+13. [Unfixed Bugs](#unfixed-bugs)
+14. [Future Improvements](#future-improvements)
+15. [Data Ethics & Privacy](#data-ethics--privacy)
+16. [Project Management](#project-management)
+17. [Technologies Used](#technologies-used)
+18. [How to Run](#how-to-run)
+19. [Credits](#credits)
 
 ---
 
@@ -54,6 +61,34 @@ The project follows the CRISP-DM methodology and includes:
 
 ---
 
+## Business Requirements
+
+The client is a stakeholder in the US automobile market (e.g. a manufacturer 
+or dealership) who wants to understand what drives car prices and be able 
+to estimate a fair price for a car based on its specifications.
+
+* **BR1:** The client wants to understand which car attributes have the 
+  strongest relationship with price, so pricing and marketing decisions 
+  can be informed by data rather than intuition.
+  → Addressed via Hypotheses 1, 2 and 4, and the Feature Importance analysis.
+
+* **BR2:** The client wants to know whether brand positioning (luxury vs 
+  economy) and fuel type meaningfully affect price, to support brand 
+  strategy and market segmentation decisions.
+  → Addressed via Hypotheses 2 and 3.
+
+* **BR3:** The client wants a tool to predict the price of a car given its 
+  specifications, so that new or competitor models can be quickly 
+  benchmarked without manual analysis.
+  → Addressed via the Machine Learning model and the Streamlit prediction app.
+
+* **BR4:** The client wants the findings communicated in an accessible, 
+  interactive format that does not require technical or statistical 
+  expertise to interpret.
+  → Addressed via the Tableau dashboard and the Streamlit app's Key Findings page.
+
+---
+
 ## Business Hypotheses
 
 | Hypothesis | Result | p-value |
@@ -68,6 +103,42 @@ Engine size (correlation: 0.87) is the strongest predictor of car price,
 followed by curbweight (0.84) and horsepower (0.81).
 
 ----
+
+## ML Business Case
+
+* **Aim:** Predict the price of a car (USD) based on its technical 
+  specifications and attributes, to support BR3 (price benchmarking).
+
+* **Learning method:** Supervised regression, since the target variable 
+  (price) is continuous, not categorical.
+
+* **Ideal outcome:** A model that predicts car price closely enough to be 
+  useful for benchmarking (target: Test R² > 0.85).
+
+* **Success metrics:**
+  * Test R² ≥ 0.85
+  * Test RMSE and MAE as low as reasonably possible given the small dataset
+
+* **Model output:** A single predicted price (USD), with the model's Test 
+  MAE (±$1,572) presented alongside each prediction as an indication of 
+  expected error, so the client can interpret the result with appropriate 
+  caution.
+
+* **Heuristics:** Currently, pricing decisions in this context are likely 
+  made using manual comparison to similar models or general market 
+  knowledge — this project replaces that heuristic with a data-driven 
+  estimate.
+
+* **Training data:** The Kaggle Car Price Prediction dataset (205 rows, 
+  26 columns), covering US automobile market listings. `price_per_horsepower` 
+  and `price_per_enginesize` were excluded from training as they are 
+  derived directly from the target variable and would cause data leakage.
+
+* **Model selected:** ExtraTreesRegressor, chosen after testing five 
+  algorithms and running hyperparameter optimisation via GridSearchCV 
+  (see [Machine Learning](#machine-learning) for full detail).
+
+---
 
 ## ETL Pipeline
 
@@ -178,4 +249,3 @@ No transformation improved model performance — tree-based models are inherentl
 robust to skewness in the target variable.
 
 ---
-
