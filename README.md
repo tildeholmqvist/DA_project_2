@@ -249,3 +249,10 @@ No transformation improved model performance — tree-based models are inherentl
 robust to skewness in the target variable.
 
 ---
+
+
+
+## Project Management
+[USING GITHUB PROJECTS FOR MANAGEMENT]
+
+https://da-project-2.onrender.com
