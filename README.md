@@ -627,12 +627,20 @@ workflow I intend to continue using in future data analytics projects.
   this development environment; Claude (Anthropic) was used as the 
   primary AI assistant throughout the project instead.
 * Claude was used for: debugging code errors, guidance on Tableau and 
-  Streamlit implementation, code review against PEP8 standards, and 
-  documentation support.
-* ChatGPT (OpenAI) was also used for guidance during parts of the 
+  Streamlit implementation as well as the Car Price Prediction page, 
+  code review against PEP8 standards, and documentation support.
+* ChatGPT (OpenAI) was primarily used for guidance during parts of the 
   development process.
-* All hypotheses, analytical interpretations, business reasoning, and 
-  final code implementation decisions are the author's own.
+* All hypotheses, analytical interpretations, business reasoning, data 
+  cleaning decisions, and the underlying notebooks are the author's own.
+
+### Code
+* Much of the underlying code structure — including the multi-page 
+  Streamlit app template (`multi_page.py`, `app.py`), the ETL/EDA/ML 
+  notebook workflow, the scikit-learn pipeline pattern, and the 
+  hyperparameter search class — is adapted from Code Institute LMS 
+  walkthrough lessons and templates, applied to this project's own 
+  dataset, hypotheses, and analysis.
 
 ### Acknowledgements
 * Code Institute LMS — course material and project template

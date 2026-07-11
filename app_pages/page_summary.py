@@ -18,7 +18,13 @@ def page_summary_body():
         "* 205 cars with 26 features from the US automobile market, "
         "across 22 brands"
     )
-    st.write("* Source: Kaggle — Car Price Prediction dataset")
+    st.markdown(
+        "* Source: "
+        "<a href='https://www.kaggle.com/datasets/hellbuoy/"
+        "car-price-prediction?resource=download' target='_blank'>"
+        "Kaggle — Car Price Prediction dataset</a>",
+        unsafe_allow_html=True
+    )
 
     st.write("## Business Hypotheses")
     st.write(
@@ -38,3 +44,12 @@ def page_summary_body():
     st.write("## Key Results")
     st.write("* Best model: ExtraTreesRegressor (R²=0.911 on test set)")
     st.write("* Strongest price predictor: Engine size (importance: 0.20)")
+
+    st.write("---")
+    st.markdown(
+        "See the full interactive analysis on "
+        "<a href='https://public.tableau.com/shared/N6ZSWTY39"
+        "?:display_count=n&:origin=viz_share_link' target='_blank'>"
+        "Tableau Public</a>.",
+        unsafe_allow_html=True
+    )
