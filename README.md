@@ -37,7 +37,8 @@ The project follows the CRISP-DM methodology and includes:
 16. [Project Management](#project-management)
 17. [Technologies Used](#technologies-used)
 18. [How to Run](#how-to-run)
-19. [Credits](#credits)
+19. [Reflection](#reflection)
+20. [Credits](#credits)
 
 ---
 
@@ -570,16 +571,68 @@ The app is deployed on Render and publicly accessible at:
 
 ---
 
+## Reflection
+
+This project involved learning and applying several tools for the first 
+time, which required adapting quickly and troubleshooting along the way.
+
+**New tools and methodologies:**
+Tableau Public and Streamlit were both new to me at the start of this 
+course. Building the Tableau dashboard required learning concepts such 
+as calculated fields, LOD expressions, dashboard actions, and the Story 
+feature for guided narratives, skills I had not used before. Similarly, 
+structuring a multi-page Streamlit app and connecting it to a trained 
+scikit-learn pipeline required understanding how to load and reuse a 
+saved model (`joblib`) consistently across notebooks and app code.
+
+**Challenges faced and how they were overcome:**
+* *Duplicate output folders:* Running notebook cells out of order (before 
+  restarting the kernel) caused an `outputs/` folder to be created in the 
+  wrong directory. I diagnosed this by comparing folder contents with 
+  `diff`, confirmed the correct files, and removed the duplicate.
+* *A silent bug in `02_EDA.ipynb`:* Running "Restart & Run All" revealed 
+  that `CarBrand` was being used in hypothesis testing without ever being 
+  created in that notebook, it had only appeared to work previously 
+  because it had been created earlier in the same kernel session by 
+  another notebook. I fixed this by adding an explicit extraction step, 
+  which also taught me to always test notebooks with a full kernel 
+  restart rather than assuming cell execution order.
+* *PEP8 compliance:* My initial code had multiple line-length and spacing 
+  violations, identified using the Code Institute PEP8 validator. Fixing 
+  these systematically improved the overall readability of the codebase.
+* *AI tooling:* GitHub Copilot did not integrate reliably in my 
+  development environment, so I adapted by using Claude as my primary 
+  AI assistant for debugging, code review, and implementation guidance 
+  throughout the project (see Credits for details), as well as ChatGPT.
+
+**How this project prepared me for future work:**
+Working across three connected deliverables (Jupyter notebooks, a 
+Tableau dashboard, and a deployed Streamlit app) taught me the 
+importance of keeping data transformations consistent across every 
+tool that touches the same dataset, a small inconsistency in one place 
+(like the CarBrand bug) can silently break something built on top of it. 
+I also became more comfortable using a Kanban board (GitHub Projects) to 
+break a large project into manageable, trackable tasks, which is a 
+workflow I intend to continue using in future data analytics projects.
+
+---
+
 ## Credits
 
 ### Dataset
 * [Car Price Prediction Dataset](https://www.kaggle.com/datasets/hellbuoy/car-price-prediction?resource=download) by hellbuoy on Kaggle
 
 ### AI Assistance
-* Claude (Anthropic) — used for guidance, problem-solving, debugging, 
-  and code review during development, including Streamlit app development, and documentation
-* ChatGPT (OpenAI) — used for guidance during parts of the development 
-  process
+* GitHub Copilot was initially used but did not integrate reliably in 
+  this development environment; Claude (Anthropic) was used as the 
+  primary AI assistant throughout the project instead.
+* Claude was used for: debugging code errors, guidance on Tableau and 
+  Streamlit implementation, code review against PEP8 standards, and 
+  documentation support.
+* ChatGPT (OpenAI) was also used for guidance during parts of the 
+  development process.
+* All hypotheses, analytical interpretations, business reasoning, and 
+  final code implementation decisions are the author's own.
 
 ### Acknowledgements
 * Code Institute LMS — course material and project template
