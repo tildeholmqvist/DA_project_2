@@ -102,7 +102,7 @@ to estimate a fair price for a car based on its specifications.
 Engine size (correlation: 0.87) is the strongest predictor of car price, 
 followed by curbweight (0.84) and horsepower (0.81).
 
-----
+---
 
 ## ML Business Case
 
@@ -196,7 +196,8 @@ followed by curbweight (0.84) and horsepower (0.81).
 * ANOVA p-value: 0.0000
 * Result: Confirmed ✅
 
-----
+---
+
 ## Machine Learning
 
 ### Pipeline
@@ -451,6 +452,7 @@ During development, one bug was identified and fixed: a missing
   hosting service, the app may be slow to "wake up" after inactivity. 
   Upgrading to a paid tier or optimising cold-start time would improve 
   user experience for a production use case.
+
 ---
 
 ## Data Ethics & Privacy
@@ -519,10 +521,68 @@ before moving on to the next.
 
 ## How to Run
 
-_(to be added)_
+### Prerequisites
+* Python 3.11
+* Git
+
+### Setup
+
+1. Clone the repository:
+```bash
+   git clone https://github.com/tildeholmqvist/DA_project_2.git
+   cd DA_project_2
+```
+
+2. Create and activate a virtual environment:
+```bash
+   python3 -m venv .venv
+   source .venv/bin/activate
+```
+
+3. Install dependencies:
+```bash
+   pip install -r requirements.txt
+```
+
+### Running the Notebooks
+
+The three Jupyter notebooks are located in `jupyter_notebooks/` and should 
+be run in order:
+1. `01_ETL_Pipeline.ipynb` — cleans the raw data and saves the cleaned 
+   dataset to `outputs/datasets/cleaned/`
+2. `02_EDA.ipynb` — performs exploratory analysis and hypothesis testing
+3. `03_ML.ipynb` — trains the ML model and saves it to `outputs/models/`
+
+Each notebook includes a "Change working directory" step near the top 
+that should only be run once per kernel session.
+
+### Running the Streamlit App Locally
+
+```bash
+streamlit run app.py
+```
+
+The app will open at `http://localhost:8501`.
+
+### Live Deployment
+The app is deployed on Render and publicly accessible at:  
+[https://da-project-2.onrender.com](https://da-project-2.onrender.com)
 
 ---
 
 ## Credits
 
-_(to be added)_
+### Dataset
+* [Car Price Prediction Dataset](https://www.kaggle.com/datasets/hellbuoy/car-price-prediction?resource=download) by hellbuoy on Kaggle
+
+### AI Assistance
+* Claude (Anthropic) — used for guidance, problem-solving, debugging, 
+  and code review during development, including Streamlit app development, and documentation
+* ChatGPT (OpenAI) — used for guidance during parts of the development 
+  process
+
+### Acknowledgements
+* Code Institute LMS — course material and project template
+* Marcel (mentor) — guidance throughout the project
+
+---
