@@ -1,3 +1,8 @@
+"""
+Main entry point for the Car Price Predictor Streamlit app.
+Registers the three app pages (Project Summary, Car Price Prediction,
+Key Findings) with the MultiPage framework and runs the app.
+"""
 import streamlit as st
 from app_pages.multi_page import MultiPage
 
@@ -5,6 +10,7 @@ from app_pages.page_summary import page_summary_body
 from app_pages.page_prediction import page_prediction_body
 from app_pages.page_findings import page_findings_body
 
+# Create the app instance and register each page's render function
 app = MultiPage(app_name="Car Price Predictor 🚗")
 
 app.add_page("Project Summary", page_summary_body)

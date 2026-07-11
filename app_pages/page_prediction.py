@@ -5,6 +5,10 @@ import joblib
 
 @st.cache_resource
 def load_model_and_encoder():
+    """
+    Loads the trained ExtraTreesRegressor model and its fitted
+    OrdinalEncoder from outputs/models/, both saved in 03_ML.ipynb.
+    """
     model = joblib.load('outputs/models/car_price_model.pkl')
     encoder = joblib.load('outputs/models/encoder.pkl')
     return model, encoder

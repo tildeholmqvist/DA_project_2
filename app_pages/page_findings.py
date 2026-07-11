@@ -5,6 +5,11 @@ import plotly.express as px
 
 @st.cache_data
 def load_data():
+    """
+    Loads the cleaned car price dataset and extracts CarBrand from
+    CarName, applying the same typo corrections used in the ML
+    notebook (03_ML.ipynb) to keep results consistent.
+    """
     df = pd.read_csv('outputs/datasets/cleaned/car_prices_cleaned.csv')
     df['CarBrand'] = df['CarName'].str.split().str[0].str.lower()
     df['CarBrand'] = df['CarBrand'].replace({
@@ -18,6 +23,11 @@ def load_data():
 
 
 def page_findings_body():
+    """
+    Displays the Key Findings page, presenting the EDA and ML results
+    organised by hypothesis (H1-H4), followed by feature importance,
+    model performance, limitations, and business recommendations.
+    """
     df = load_data()
 
     st.write("# Key Findings")
