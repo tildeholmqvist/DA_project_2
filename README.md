@@ -430,7 +430,18 @@ rather than a bug.
 
 ## Unfixed Bugs
 
-No unfixed bugs remain at the time of submission.
+No functional bugs remain at the time of submission.
+
+One minor cosmetic issue remains in the Tableau dashboard: a small 
+number of built-in Tableau UI strings (e.g. the "(All)" option in 
+filter dropdowns, and box plot reference line labels such as "Upper 
+Whisker"/"Median") display in Swedish rather than English. This is 
+caused by the Tableau Public account's language/locale setting, which 
+affects certain auto-generated interface text that is not user-editable 
+via the workbook itself. All custom text, titles, and data labels 
+created for this project are in English. This was investigated but not 
+resolved, as changing the account-level locale was outside the scope of 
+what could be safely tested without risking other workbook settings.
 
 During development, one bug was identified and fixed: a missing 
 `CarBrand` extraction step in `02_EDA.ipynb` (see 
