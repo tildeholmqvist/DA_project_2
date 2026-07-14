@@ -565,9 +565,36 @@ streamlit run app.py
 
 The app will open at `http://localhost:8501`.
 
-### Live Deployment
-The app is deployed on Render and publicly accessible at:  
-[https://da-project-2.onrender.com](https://da-project-2.onrender.com)
+### Deployment (Render)
+
+The app was deployed to Render instead of Heroku, since the Heroku 
+student tier was not accessible at the time of deployment. The trained 
+model (`outputs/models/car_price_model.pkl`) is served through a 
+[Streamlit](https://streamlit.io/) web app, deployed to 
+[Render](https://render.com/) using a Docker image. Render builds the 
+`Dockerfile` in the repository root, runs the container, and exposes it 
+on a public HTTPS URL.
+
+**Deploy steps:**
+1. Push the repository (including the `Dockerfile`, `app.py`, and the 
+   trained `.pkl` model) to GitHub.
+2. Sign in to the [Render Dashboard](https://dashboard.render.com/) and 
+   click **New → Web Service**.
+3. Connect the GitHub account and select the repository.
+4. Configure the service:
+   * Language / Runtime: `Docker` (Render auto-detects the `Dockerfile`)
+   * Branch: `main`
+   * Instance Type: Free plan (note: free services spin down after 
+     inactivity and cold-start on the next request)
+5. Render automatically injects a `PORT` environment variable — the 
+   Dockerfile binds Streamlit to it, so no extra configuration is 
+   required.
+6. Click **Create Web Service**. Render builds the Docker image, starts 
+   the container, and publishes the app at 
+   `https://da-project-2.onrender.com`.
+7. Every push to `main` triggers an automatic rebuild and redeploy.
+
+**Live App:** [https://da-project-2.onrender.com](https://da-project-2.onrender.com)
 
 ---
 
