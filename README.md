@@ -1,4 +1,4 @@
-# Car Price Analysis — Capstone Unit 2
+# Car Price Analysis
 
 ## Project Overview
 
@@ -29,7 +29,7 @@ The project follows the CRISP-DM methodology and includes:
 8. [Machine Learning](#machine-learning)
 9. [Dashboard & Visualisation](#dashboard--visualisation)
 10. [Streamlit App](#streamlit-app)
-11. [Dashboard Design (Wireframes)](#dashboard-design-wireframes)
+11. [App & Dashboard Design](#app--dashboard-design)
 12. [Testing & Validation](#testing--validation)
 13. [Unfixed Bugs](#unfixed-bugs)
 14. [Future Improvements](#future-improvements)
@@ -334,7 +334,7 @@ underlying analysis.
 
 ---
 
-## Dashboard Design (Wireframes)
+## App & Dashboard Design
 
 This section outlines the layout and content of each Streamlit page and the 
 Tableau dashboard.
