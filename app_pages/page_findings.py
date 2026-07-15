@@ -273,6 +273,16 @@ def page_findings_body():
         title='Feature Importance — ExtraTreesRegressor'
     )
     st.plotly_chart(fig5)
+    st.caption(
+        "This chart shows how much each car feature contributed to "
+        "the machine learning model's price predictions, based on a "
+        "score between 0 and 1 (all scores add up to roughly 1.0, or "
+        "100%). The longer the bar, the more that feature influenced "
+        "the model's decisions. For example, enginesize at 0.20 means "
+        "engine size accounted for about 20% of the model's overall "
+        "'reasoning' when predicting price — the single biggest "
+        "factor."
+    )
 
     st.write("---")
 
@@ -282,6 +292,19 @@ def page_findings_body():
     st.write("* **Test R²:** 0.911")
     st.write("* **Test RMSE:** $2,619")
     st.write("* **Test MAE:** $1,572")
+    st.caption(
+        "**R²** shows how much of the variation in car prices the "
+        "model can explain, from 0 (no better than guessing) to 1 "
+        "(perfect predictions). A score of 0.911 means the model "
+        "explains about 91% of what drives price. **RMSE** and "
+        "**MAE** both measure the model's typical prediction error in "
+        "dollars — MAE is the average error size (\\$1,572), while "
+        "RMSE penalises larger errors more heavily. Both being "
+        "reasonably close together (and both far smaller than the "
+        "average car price of \\$13,276) indicates the model performs "
+        "consistently well, without a few huge mistakes skewing the "
+        "results."
+    )
 
     st.write("---")
 

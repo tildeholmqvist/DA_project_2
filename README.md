@@ -199,7 +199,7 @@ Data analysis bridges statistics and actionable business insight:
 * **Reproducibility** — Documenting each step of the pipeline (ETL → EDA 
   → ML) so that anyone reading the project can follow exactly how the 
   results were produced and verify them independently.
-  
+
 ---
 
 ## ETL Pipeline
@@ -493,20 +493,14 @@ rather than a bug.
 
 No functional bugs remain at the time of submission.
 
-One minor cosmetic issue remains in the Tableau dashboard: a small 
-number of built-in Tableau UI strings (e.g. the "(All)" option in 
-filter dropdowns, and box plot reference line labels such as "Upper 
-Whisker"/"Median") display in Swedish rather than English. This is 
-caused by the Tableau Public account's language/locale setting, which 
-affects certain auto-generated interface text that is not user-editable 
-via the workbook itself. All custom text, titles, and data labels 
-created for this project are in English. This was investigated but not 
-resolved, as changing the account-level locale was outside the scope of 
-what could be safely tested without risking other workbook settings.
-
-During development, one bug was identified and fixed: a missing 
-`CarBrand` extraction step in `02_EDA.ipynb` (see 
-[Testing & Validation](#testing--validation) for details).
+During development, two bugs were identified and fixed:
+* A missing `CarBrand` extraction step in `02_EDA.ipynb` (see 
+  [Testing & Validation](#testing--validation) for details).
+* Streamlit's markdown renderer interprets text between two dollar 
+  signs (`$`) as LaTeX mathematical notation. A caption containing two 
+  dollar amounts (e.g. "$1,572" and "$13,276") rendered as garbled, 
+  italicised text instead of plain sentences. Fixed by escaping dollar 
+  signs (`\$`) wherever more than one appeared in the same text string.
 
 ---
 
