@@ -53,6 +53,13 @@ def page_findings_body():
         trendline='ols'
     )
     st.plotly_chart(fig1a)
+    st.caption(
+        "Each dot on this chart is one car. The further right a dot "
+        "is, the bigger that car's engine; the higher up it is, the "
+        "more expensive it is. The line running through the dots is "
+        "a **trendline** — if it slopes upward, that tells us bigger "
+        "engines tend to cost more."
+    )
 
     fig1b = px.scatter(
         df, x='horsepower', y='price',
@@ -62,6 +69,12 @@ def page_findings_body():
         trendline='ols'
     )
     st.plotly_chart(fig1b)
+    st.caption(
+        "This chart works the same way, but compares horsepower "
+        "(engine power output) to price instead of engine size. The "
+        "upward-sloping trendline shows the same kind of pattern: "
+        "more powerful cars tend to cost more."
+    )
 
     num_cols = [
         'enginesize', 'horsepower', 'curbweight', 'carlength',
@@ -76,11 +89,22 @@ def page_findings_body():
         labels={'x': 'Correlation with Price', 'y': 'Feature'}
     )
     st.plotly_chart(fig1c)
+    st.caption(
+        "This chart ranks every numeric feature by its **correlation** "
+        "with price — a score from -1 to +1 showing how strongly two "
+        "things move together. A score close to +1 (like enginesize "
+        "at 0.87) means a strong tendency to rise together; a score "
+        "close to 0 means little to no relationship. The longer the "
+        "bar reaches to the right, the stronger the connection to "
+        "price."
+    )
 
     st.success(
-        "✅ Hypothesis 1 partially confirmed — Engine size (0.87) is "
-        "the strongest predictor, but curbweight (0.84) unexpectedly "
-        "outperformed horsepower (0.81)"
+        "✅ Answering the question 'Do engine size and horsepower "
+        "significantly correlate with price?' — Hypothesis 1 "
+        "partially confirmed: Engine size (0.87) is the strongest "
+        "predictor, but curbweight (0.84) unexpectedly outperformed "
+        "horsepower (0.81)"
     )
 
     st.write("---")
@@ -110,8 +134,23 @@ def page_findings_body():
         color_discrete_map={'Luxury': 'darkblue', 'Economy': 'lightblue'}
     )
     st.plotly_chart(fig2)
+    st.caption(
+        "Each bar shows the average price for one car brand, sorted "
+        "from most to least expensive. Brands are colour-coded: dark "
+        "blue means the brand's average price is above $20,000 "
+        "(classified here as 'Luxury'), light blue means it's below "
+        "that ('Economy'). To check whether this price gap is a real "
+        "pattern rather than random chance, we ran a **t-test** — a "
+        "statistical test that compares the average of two groups. "
+        "The result (p-value = 0.0000, far below the usual 0.05 "
+        "cut-off) tells us the difference is highly unlikely to be "
+        "due to chance."
+    )
+
     st.success(
-        "✅ Hypothesis 2 confirmed — Luxury brands are significantly "
+        "✅ Answering the question 'Do luxury brands have "
+        "significantly higher prices than economy brands?' — "
+        "Hypothesis 2 confirmed: Luxury brands are significantly "
         "more expensive (p-value = 0.0000)"
     )
 
@@ -139,6 +178,14 @@ def page_findings_body():
         color_discrete_map={'gas': 'lightblue', 'diesel': 'darkblue'}
     )
     st.plotly_chart(fig3a)
+    st.caption(
+        "This chart compares the average price of diesel vs gas cars "
+        "using all the data we have. But there's a problem: we only "
+        "have 20 diesel cars compared to 185 gas cars, so this "
+        "comparison isn't fair — a handful of unusually priced diesel "
+        "cars could easily skew the average in a way that wouldn't "
+        "happen with a bigger sample."
+    )
 
     gas_sample = (
         df[df['fueltype'] == 'gas']['price'].sample(n=20, random_state=42)
@@ -159,11 +206,21 @@ def page_findings_body():
         color_discrete_map={'gas': 'lightblue', 'diesel': 'darkblue'}
     )
     st.plotly_chart(fig3b)
+    st.caption(
+        "To fix the unfair comparison above, we randomly picked just "
+        "20 gas cars — the same number as diesel cars — so both "
+        "groups are equally sized. This is called **balanced "
+        "sampling**. Comparing like-for-like this way gives a more "
+        "trustworthy picture than the first chart."
+    )
 
     st.error(
-        "❌ Hypothesis 3 rejected — With balanced sampling, no "
+        "❌ Answering the question 'Do diesel cars have significantly "
+        "higher prices than petrol cars?' — Hypothesis 3 rejected: "
+        "With balanced sampling, there is no statistically "
         "significant price difference between diesel and gas cars "
-        "(p-value = 0.8659)"
+        "(p-value = 0.8659, well above the 0.05 cut-off, meaning any "
+        "difference we see is likely just due to chance)"
     )
 
     st.write("---")
@@ -181,10 +238,22 @@ def page_findings_body():
         color='carbody'
     )
     st.plotly_chart(fig4)
+    st.caption(
+        "This is called a **box plot** — each box summarises the "
+        "price spread for one body style. The line inside the box is "
+        "the **median** (the middle price when all values are sorted "
+        "— half the cars cost more, half cost less). The box itself "
+        "covers the middle 50% of prices, and the thin lines "
+        "extending out ('whiskers') show the typical range beyond "
+        "that. Dots sitting far above or below the whiskers are "
+        "**outliers** — unusually priced cars for that body style."
+    )
+
     st.success(
-        "✅ Hypothesis 4 confirmed — Body style significantly "
-        "influences price (p-value = 0.0000). Convertibles are the "
-        "most expensive."
+        "✅ Answering the question 'Does car body style "
+        "significantly influence price?' — Hypothesis 4 confirmed: "
+        "Body style significantly influences price (p-value = "
+        "0.0000). Convertibles are the most expensive."
     )
 
     st.write("---")

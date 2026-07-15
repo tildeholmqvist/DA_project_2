@@ -24,21 +24,22 @@ The project follows the CRISP-DM methodology and includes:
 3. [Business Requirements](#business-requirements)
 4. [Business Hypotheses](#business-hypotheses)
 5. [ML Business Case](#ml-business-case)
-6. [ETL Pipeline](#etl-pipeline)
-7. [EDA & Hypothesis Testing](#eda--hypothesis-testing)
-8. [Machine Learning](#machine-learning)
-9. [Dashboard & Visualisation](#dashboard--visualisation)
-10. [Streamlit App](#streamlit-app)
-11. [App & Dashboard Design](#app--dashboard-design)
-12. [Testing & Validation](#testing--validation)
-13. [Unfixed Bugs](#unfixed-bugs)
-14. [Future Improvements](#future-improvements)
-15. [Data Ethics & Privacy](#data-ethics--privacy)
-16. [Project Management](#project-management)
-17. [Technologies Used](#technologies-used)
-18. [How to Run](#how-to-run)
-19. [Reflection](#reflection)
-20. [Credits](#credits)
+6. [Key Principles of Statistics, Probability & Data Analysis](#key-principles-of-statistics-probability--data-analysis)
+7. [ETL Pipeline](#etl-pipeline)
+8. [EDA & Hypothesis Testing](#eda--hypothesis-testing)
+9. [Machine Learning](#machine-learning)
+10. [Dashboard & Visualisation](#dashboard--visualisation)
+11. [Streamlit App](#streamlit-app)
+12. [App & Dashboard Design](#app--dashboard-design)
+13. [Testing & Validation](#testing--validation)
+14. [Unfixed Bugs](#unfixed-bugs)
+15. [Future Improvements](#future-improvements)
+16. [Data Ethics & Privacy](#data-ethics--privacy)
+17. [Project Management](#project-management)
+18. [Technologies Used](#technologies-used)
+19. [How to Run](#how-to-run)
+20. [Reflection](#reflection)
+21. [Credits](#credits)
 
 ---
 
@@ -139,6 +140,66 @@ followed by curbweight (0.84) and horsepower (0.81).
   algorithms and running hyperparameter optimisation via GridSearchCV 
   (see [Machine Learning](#machine-learning) for full detail).
 
+---
+
+## Description of Key Principles of Statistics, Probability, and Data Analysis
+
+### Statistics
+Statistics provides the foundation for understanding and interpreting data 
+in this project:
+
+* **Descriptive Statistics** — Summarising the data using mean (the 
+  average), median (the middle value when sorted), and standard 
+  deviation (how spread out the values are around the average) to 
+  understand the typical price and how much prices vary.
+* **Distribution Analysis** — Examining how car prices are spread out 
+  across the dataset, including checking for **skewness** (a measure of 
+  whether the data leans more toward low or high values rather than 
+  being evenly balanced — car prices tend to be skewed because there 
+  are many affordable cars and only a few very expensive ones). This 
+  affects how results should be interpreted and whether the data meets 
+  the assumptions required by certain statistical tests.
+* **Hypothesis Testing** — Using statistical tests (a **t-test** compares 
+  the averages of two groups, e.g. luxury vs economy brands; **ANOVA** 
+  does the same but for more than two groups, e.g. five body styles) to 
+  check whether patterns observed in the data are statistically 
+  significant, or could simply be due to random chance.
+
+### Probability
+Probability underlies how confident we can be in the conclusions drawn 
+from the data:
+
+* **Statistical Significance (p-values)** — A p-value tells us the 
+  probability of seeing a result at least as extreme as ours, if there 
+  were actually no real difference. A low p-value (below 0.05, a 
+  commonly used threshold) means the pattern is unlikely to be due to 
+  random chance alone.
+* **Correlation** — A measure of how strongly two variables move 
+  together (e.g. engine size and price), on a scale from -1 to +1. 
+  Values closer to +1 mean that as one variable increases, the other 
+  tends to increase too; values near 0 mean there is little to no 
+  relationship.
+
+### Data Analysis
+Data analysis bridges statistics and actionable business insight:
+
+* **Exploratory Data Analysis (EDA)** — Investigating the dataset's 
+  structure, distributions, and relationships before building any 
+  predictive model, to understand what the data actually looks like 
+  before drawing conclusions from it.
+* **Feature Engineering** — Creating new variables from existing data to 
+  capture useful patterns (e.g. price-per-horsepower), while also 
+  avoiding **data leakage** — accidentally including information in the 
+  model that is derived from the target variable itself (price), which 
+  would make the model appear more accurate than it really is.
+* **Data Quality Assessment** — Checking for missing values, duplicates, 
+  and class imbalance (e.g. this dataset has far more petrol cars than 
+  diesel cars, which limits how reliable some comparisons can be) that 
+  could affect the reliability of results.
+* **Reproducibility** — Documenting each step of the pipeline (ETL → EDA 
+  → ML) so that anyone reading the project can follow exactly how the 
+  results were produced and verify them independently.
+  
 ---
 
 ## ETL Pipeline
