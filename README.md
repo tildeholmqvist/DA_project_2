@@ -140,6 +140,23 @@ followed by curbweight (0.84) and horsepower (0.81).
   algorithms and running hyperparameter optimisation via GridSearchCV 
   (see [Machine Learning](#machine-learning) for full detail).
 
+### Why Supervised Learning?
+
+This is a **supervised learning** problem because the dataset already 
+includes the target we want to predict — price — for every car. The 
+model learns from many examples of car specifications paired with 
+their actual price, and identifies the pattern between them.
+
+An **unsupervised** approach (such as clustering cars into groups 
+without knowing their price) wasn't suitable here, since the goal is 
+to predict an actual price for a new car, not to sort cars into 
+unlabelled groups.
+
+Since price is a continuous number rather than a fixed category (like 
+"luxury" or "economy"), this is specifically a **regression** task, 
+as opposed to **classification**, which predicts a category instead 
+of a number.
+
 ---
 
 ## Description of Key Principles of Statistics, Probability, and Data Analysis
@@ -279,6 +296,38 @@ Five regression algorithms were tested using a two-step search strategy:
 * **Test R²:** 0.911
 * **Test RMSE:** $2,619
 * **Test MAE:** $1,572
+
+### Why ExtraTreesRegressor?
+
+Five algorithms were tested because the relationship between car 
+attributes and price wasn't expected to be a straight line — for 
+example, engine size doesn't just add a fixed amount to the price; 
+luxury brands charge more than the specs alone would suggest. This 
+made tree-based models a better fit than LinearRegression, which 
+assumes a straight-line relationship between features and price.
+
+**Quick Search results (mean R², 5-fold cross-validation, default 
+hyperparameters):**
+
+| Algorithm | Mean R² | Std R² |
+|---|---|---|
+| ExtraTreesRegressor | 0.913 | 0.032 |
+| GradientBoostingRegressor | 0.911 | 0.024 |
+| RandomForestRegressor | 0.889 | 0.025 |
+| DecisionTreeRegressor | 0.806 | 0.069 |
+| LinearRegression | 0.763 | 0.149 |
+
+ExtraTreesRegressor and GradientBoostingRegressor clearly performed 
+best, while LinearRegression's high variation (std 0.149) confirmed 
+it wasn't a reliable fit for this data. Between the two top 
+algorithms, ExtraTreesRegressor was chosen after further tuning 
+(GridSearchCV) because it gave the best overall results: Test R² 
+(0.911), Test RMSE ($2,619), and Test MAE ($1,572). It also builds 
+each of its trees independently using random splits, rather than 
+building them one after another like GradientBoosting does — this 
+made it less likely to overfit on this small dataset (205 rows), 
+which mattered given the mild overfitting already seen (Train 
+R²=0.998 vs Test R²=0.911, see [Note on Overfitting](#note-on-overfitting)).
 
 ### Feature Importance
 | Feature | Importance |
@@ -548,6 +597,8 @@ Each major project deliverable was tracked as its own issue, for example:
 This board-based workflow made it possible to track progress across the 
 project's CRISP-DM phases and ensure each deliverable was completed 
 before moving on to the next.
+
+![GitHub Projects Kanban Board](readme_images/github_project_board.png)
 
 ---
 

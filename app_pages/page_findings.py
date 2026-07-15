@@ -186,7 +186,10 @@ def page_findings_body():
         "have 20 diesel cars compared to 185 gas cars, so this "
         "comparison isn't fair — a handful of unusually priced diesel "
         "cars could easily skew the average in a way that wouldn't "
-        "happen with a bigger sample."
+        "happen with a bigger sample. This is a **sample size** issue "
+        "— a core statistical concept describing how the number of "
+        "observations in a group affects how much we can trust its "
+        "average."
     )
 
     gas_sample = (
@@ -286,7 +289,9 @@ def page_findings_body():
         "the model's decisions. For example, enginesize at 0.20 means "
         "engine size accounted for about 20% of the model's overall "
         "'reasoning' when predicting price — the single biggest "
-        "factor."
+        "factor. This ranking is called **feature importance** — a "
+        "key concept for understanding and explaining what drives a "
+        "model's predictions."
     )
 
     st.write("---")
