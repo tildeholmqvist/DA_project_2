@@ -58,7 +58,9 @@ def page_findings_body():
         "is, the bigger that car's engine; the higher up it is, the "
         "more expensive it is. The line running through the dots is "
         "a **trendline** — if it slopes upward, that tells us bigger "
-        "engines tend to cost more."
+        "engines tend to cost more. This tendency for two variables "
+        "to move together is called **correlation** — a core "
+        "statistical concept used throughout this analysis."
     )
 
     fig1b = px.scatter(
@@ -246,14 +248,17 @@ def page_findings_body():
         "covers the middle 50% of prices, and the thin lines "
         "extending out ('whiskers') show the typical range beyond "
         "that. Dots sitting far above or below the whiskers are "
-        "**outliers** — unusually priced cars for that body style."
+        "**outliers** — unusually priced cars for that body style. "
+        "Median, quartiles and outliers are core **descriptive "
+        "statistics** — they summarise a dataset's spread and central "
+        "tendency without assuming a specific distribution shape."
     )
 
     st.success(
         "✅ Answering the question 'Does car body style "
-        "significantly influence price?' — Hypothesis 4 confirmed: "
-        "Body style significantly influences price (p-value = "
-        "0.0000). Convertibles are the most expensive."
+        "significantly influence price?' — Hypothesis 4 confirmed "
+        "(ANOVA test): Body style significantly influences price "
+        "(p-value = 0.0000). Convertibles are the most expensive."
     )
 
     st.write("---")
