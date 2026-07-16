@@ -115,8 +115,9 @@ def page_prediction_body():
         )
 
     st.write("---")
-
+    
     if st.button("Predict Price"):
+        # Build input DataFrame matching the model's expected column order
         input_data = pd.DataFrame([{
             'enginesize': enginesize,
             'horsepower': horsepower,
@@ -141,7 +142,7 @@ def page_prediction_body():
             'fuelsystem': fuelsystem,
             'CarBrand': CarBrand
         }])
-
+        # Encode categorical columns using the same encoder fitted in 03_ML.ipynb
         categorical_cols = [
             'fueltype', 'aspiration', 'carbody', 'drivewheel',
             'enginelocation', 'enginetype', 'fuelsystem', 'CarBrand'

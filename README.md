@@ -478,8 +478,8 @@ Tableau dashboard.
 * Business Recommendations
 
 ![Streamlit Key Findings — Hypothesis 1](readme_images/streamlit_key_findings_1_1.png)  
-![Streamlit Key Findings — Feature Importance & Model Performance](readme_images/streamlit_key_findings_2_1.png) 
-
+![Streamlit Key Findings — Hypothesis 4 & Feature Importance](readme_images/streamlit_key_findings_4_1.png) 
+![Streamlit Key Findings — Model Performance, Limitations & Business Recommendations](readme_images/streamlit_key_findings_5_1.png) 
 
 ### Tableau Dashboard
 * Dashboard title, full-width bar chart (Average Price by Car Brand) on the 
