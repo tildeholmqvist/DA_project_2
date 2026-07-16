@@ -24,7 +24,7 @@ The project follows the CRISP-DM methodology and includes:
 3. [Business Requirements](#business-requirements)
 4. [Business Hypotheses](#business-hypotheses)
 5. [ML Business Case](#ml-business-case)
-6. [Key Principles of Statistics, Probability & Data Analysis](#key-principles-of-statistics-probability--data-analysis)
+6. [Key Principles of Statistics, Probability & Data Analysis](#description-of-key-principles-of-statistics-probability-and-data-analysis)
 7. [ETL Pipeline](#etl-pipeline)
 8. [EDA & Hypothesis Testing](#eda--hypothesis-testing)
 9. [Machine Learning](#machine-learning)
